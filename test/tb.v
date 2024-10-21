@@ -4,6 +4,7 @@
 /* This testbench just instantiates the module and makes some convenient wires
    that can be driven / tested by the cocotb test.py.
 */
+
 module tb ();
 
   // Dump the signals to a VCD file. You can view it with gtkwave.
@@ -27,13 +28,21 @@ module tb ();
   wire VGND = 1'b0;
 `endif
 
-  // Replace tt_um_example with your module name:
-  tt_um_example user_project (
+  // Silife signals
+  reg en;
+  reg wr_en;
+  reg [4:0] row_select;
+  reg [7:0] grid_in;
+  wire [7:0] grid_out = uo_out;
 
+  assign ui_in  = {wr_en, en, 1'b0, row_select};
+  assign uio_in = grid_in;
+
+  tt_um_urish_silife_max silife (
       // Include power ports for the Gate Level test:
 `ifdef GL_TEST
-      .VPWR(VPWR),
-      .VGND(VGND),
+      .VPWR   (1'b1),
+      .VGND   (1'b0),
 `endif
 
       .ui_in  (ui_in),    // Dedicated inputs
