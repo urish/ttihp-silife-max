@@ -29,6 +29,7 @@ always @(posedge clk) begin
         row_select <= 5'b0;
         init_done <= 1'b0;
         wr_en <= 1'b0;
+        counter <= 32'd0;
     end else if (en) begin
         if (!init_done) begin
           if (wr_en) begin
