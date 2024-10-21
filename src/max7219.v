@@ -36,11 +36,12 @@ module silife_max7219 (
   localparam StatePause = 3'd4;
 
   reg [2:0] state;
-  assign o_busy = (state == StateStart || state == StateData || state == StateEnable) | spi_busy;
 
   reg [15:0] spi_word;
   reg spi_start;
   wire spi_busy;
+
+  assign o_busy = (state == StateStart || state == StateData || state == StateEnable) | spi_busy;
 
   reg load_row;
   reg [7:0] row_data;

@@ -34,13 +34,13 @@ module grid_8x32 (
     output wire [7:0] cells2
 );
 
+  wire [256-1:0] cell_values;
+
   wire [7:0] row_offset = {row_select, 3'b0};
   assign cells = cell_values[row_offset+:8];
 
   wire [7:0] row_offset2 = {row_select2, 3'b0};
   assign cells2 = cell_values[row_offset2+:8];
-
-  wire [256-1:0] cell_values;
 
   assign o_w[0] = cell_values[0];
   assign o_n[0] = cell_values[0];
