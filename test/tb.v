@@ -23,10 +23,6 @@ module tb ();
   wire [7:0] uo_out;
   wire [7:0] uio_out;
   wire [7:0] uio_oe;
-`ifdef GL_TEST
-  wire VPWR = 1'b1;
-  wire VGND = 1'b0;
-`endif
 
   // Silife signals
   reg en;
@@ -39,12 +35,6 @@ module tb ();
   assign uio_in = grid_in;
 
   tt_um_urish_silife_max silife (
-      // Include power ports for the Gate Level test:
-`ifdef GL_TEST
-      .VPWR   (1'b1),
-      .VGND   (1'b0),
-`endif
-
       .ui_in  (ui_in),    // Dedicated inputs
       .uo_out (uo_out),   // Dedicated outputs
       .uio_in (uio_in),   // IOs: Input path
